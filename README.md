@@ -4,7 +4,7 @@ Gradle dependency  ```build.gradle```
 
 ```
 dependencies {
-    compile 'com.neo1125.NumberKeyView:0.1.0'
+    compile 'com.neo1125:numberkeyview:0.1.0'
 }
 ```
 
