@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="NumberKeyView">
+        <attr name="keyStyle" format="enum">
+            <enum name="square" value="1" />
+            <enum name="circle" value="2" />
+        </attr>
+        <attr name="keyScale" format="float" />
+        <attr name="keyTextFontFamily" format="string" />
+        <attr name="keyBackgroundColor" format="color"/>
+        <attr name="keyHighlightColor" format="color"/>
+        <attr name="keyTextColor" format="color"/>
+        <attr name="keyTextSize" format="dimension"/>
+        <attr name="keyBorderColor" format="color"/>
+        <attr name="keyBorderSize" format="dimension"/>
+        <attr name="keyClearIcon" format="reference"/>
+        <attr name="keyClearBackgroundColor" format="color" />
+        <attr name="keyClearPosition" format="enum">
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <attr name="keyEmptyBackgroundColor" format="color" />
+    </declare-styleable>
+
+</resources>
