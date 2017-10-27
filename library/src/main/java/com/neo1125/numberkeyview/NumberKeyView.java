@@ -3,6 +3,7 @@ package com.neo1125.numberkeyview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -23,6 +24,7 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
     private NumberKeyOnClickListener linstener;
     private float keyScale = 1;
     private String keyTextFontFamily = "";
+    private int keyTextFontStyle = Typeface.NORMAL;
     private int keyBackgroundColor = Color.BLACK;
     private int keyHighlightColor = keyBackgroundColor;
     private int keyTextColor = Color.WHITE;
@@ -135,10 +137,12 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
         int style = typed.getInt(R.styleable.NumberKeyView_keyStyle, 1);
         keyScale = typed.getFloat(R.styleable.NumberKeyView_keyScale, keyScale);
         keyTextFontFamily = typed.getString(R.styleable.NumberKeyView_keyTextFontFamily);
+        keyTextFontStyle = typed.getInt(R.styleable.NumberKeyView_keyTextFontStyle, keyTextFontStyle);
         keyBackgroundColor = typed.getColor(R.styleable.NumberKeyView_keyBackgroundColor, keyBackgroundColor);
         keyHighlightColor = typed.getColor(R.styleable.NumberKeyView_keyHighlightColor, keyHighlightColor);
         keyTextColor = typed.getColor(R.styleable.NumberKeyView_keyTextColor, keyTextColor);
         keyTextSize = typed.getDimensionPixelSize(R.styleable.NumberKeyView_keyTextSize, keyTextSize);
+
         keyBorderColor = typed.getColor(R.styleable.NumberKeyView_keyBorderColor, keyBorderColor);
         keyBorderSize = typed.getDimensionPixelSize(R.styleable.NumberKeyView_keyBorderSize, keyBorderSize);
         drawableLeft = typed.getResourceId(R.styleable.NumberKeyView_keyClearIcon, drawableLeft);
@@ -164,7 +168,7 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
                 NumberKeyButton button = new NumberKeyButton(context, attrs);
                 button.setLayoutParams(new LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1));
                 button.setScale(keyScale);
-                button.setTextFontface(keyTextFontFamily);
+                button.setTextFontface(keyTextFontFamily, keyTextFontStyle);
                 button.setOnClickListener(this);
                 button.setOnTouchListener(new OnTouchListener() {
                     @Override

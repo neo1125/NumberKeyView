@@ -11,12 +11,13 @@
 
     <TextView
         android:id="@+id/textView"
-        android:text=""
+        android:text="1"
         android:textSize="100sp"
         android:hint="입력해주세요"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="monospace"/>
+        app:font="NotoSansLight"
+        />
 
     <com.neo1125.numberkeyview.NumberKeyView
         android:id="@+id/numberKey"
@@ -28,13 +29,13 @@
         app:keyBorderSize="1dp"
         app:keyBackgroundColor="#66000000"
         app:keyHighlightColor="#2b000000"
+        app:keyTextFontFamily="HelveticaNeueThin"
         app:keyTextColor="@android:color/white"
         app:keyTextSize="60sp"
         app:keyClearIcon="@drawable/ic_backspace_black"
         app:keyClearPosition="left"
         app:keyClearBackgroundColor="@android:color/white"
         app:keyEmptyBackgroundColor="@android:color/black"
-        app:keyTextFontFamily="monospace"
         app:keyCustomText="입력"
         app:keyCustomTextColor="#000000"
         app:keyCustomBackgroundColor="#efefef"

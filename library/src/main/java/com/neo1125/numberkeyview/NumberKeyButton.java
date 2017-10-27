@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -152,8 +153,17 @@ class NumberKeyButton extends FrameLayout {
     }
 
     public void setTextFontface(String familyName) {
-        if (familyName != null && !familyName.equals(""))
-            titleTextView.setTypeface(Typeface.create(familyName, Typeface.NORMAL));
+        setTextFontface(familyName, Typeface.NORMAL);
+    }
+
+    public void setTextFontface(String familyName, int style) {
+        if (familyName != null) {
+            Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), String.format("%s.ttf", familyName));
+            if (typeface != null)
+                titleTextView.setTypeface(typeface, style);
+            else
+                titleTextView.setTypeface(Typeface.create(familyName, style));
+        }
     }
 
     public void setPressedColor(int color) {

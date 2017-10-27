@@ -8,10 +8,17 @@
         </attr>
         <attr name="keyScale" format="float" />
         <attr name="keyTextFontFamily" format="string" />
+        <attr name="keyTextFontStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+            <enum name="boldItalic" value="3" />
+        </attr>
         <attr name="keyBackgroundColor" format="color"/>
         <attr name="keyHighlightColor" format="color"/>
         <attr name="keyTextColor" format="color"/>
         <attr name="keyTextSize" format="dimension"/>
+
         <attr name="keyBorderColor" format="color"/>
         <attr name="keyBorderSize" format="dimension"/>
         <attr name="keyClearIcon" format="reference"/>
