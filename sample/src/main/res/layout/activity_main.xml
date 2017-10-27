@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@android:color/holo_blue_bright"
     tools:context="com.neo1125.numberkeyviewsample.MainActivity"
     tools:ignore="MissingConstraints">
+
+    <TextView
+        android:id="@+id/textView"
+        android:text=""
+        android:textSize="100sp"
+        android:hint="입력해주세요"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"/>
 
     <com.neo1125.numberkeyview.NumberKeyView
         android:id="@+id/numberKey"
         android:layout_width="400dp"
         android:layout_height="500dp"
-        android:layout_gravity="center"
         app:keyStyle="circle"
         app:keyScale="0.8"
         app:keyBorderColor="@android:color/white"
@@ -26,13 +35,6 @@
         app:keyClearBackgroundColor="@android:color/white"
         app:keyEmptyBackgroundColor="@android:color/black"
         app:keyTextFontFamily="monospace"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="10dp" />
+        />
 
-    <TextView
-        android:text="11"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fontFamily="monospace"/>
-
-</FrameLayout>
+</LinearLayout>
