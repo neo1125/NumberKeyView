@@ -21,6 +21,10 @@
             <enum name="right" value="2" />
         </attr>
         <attr name="keyEmptyBackgroundColor" format="color" />
+        <attr name="keyCustomText" format="string" />
+        <attr name="keyCustomTextColor" format="color" />
+        <attr name="keyCustomBackgroundColor" format="color" />
+        <attr name="keyCustomHighlightColor" format="color" />
     </declare-styleable>
 
 </resources>

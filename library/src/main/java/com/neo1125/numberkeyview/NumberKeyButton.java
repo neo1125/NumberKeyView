@@ -6,14 +6,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class NumberKeyButton extends FrameLayout {
+class NumberKeyButton extends FrameLayout {
 
     private TextView titleTextView;
     private ImageView iconImageView;
@@ -25,7 +24,6 @@ public class NumberKeyButton extends FrameLayout {
     private int pressedColor = -1;
     private int borderColor = Color.TRANSPARENT;
     private int borderSize = 0;
-    private int icon = -1;
 
     private int centerX;
     private int centerY;
@@ -126,8 +124,12 @@ public class NumberKeyButton extends FrameLayout {
     }
 
     public void setKey(NumberKeyView.Key key) {
+        setKey(key, null);
+    }
+
+    public void setKey(NumberKeyView.Key key, String title) {
         this.key = key;
-        titleTextView.setText(key.toString());
+        titleTextView.setText((title == null || title.isEmpty()) ? key.toString() : title);
         setEnabled(true);
         if (key == NumberKeyView.Key.empty)
             setEnabled(false);
@@ -167,10 +169,9 @@ public class NumberKeyButton extends FrameLayout {
     }
 
     public void setIcon(int drawable) {
-        icon = drawable;
         iconImageView.setImageResource(drawable);
-        iconImageView.setVisibility(VISIBLE);
-        titleTextView.setVisibility(GONE);
+        iconImageView.setVisibility(drawable == 0 ? GONE : VISIBLE);
+        titleTextView.setVisibility(drawable == 0 ? VISIBLE : GONE);
     }
 
     public void setScale(float scale) {

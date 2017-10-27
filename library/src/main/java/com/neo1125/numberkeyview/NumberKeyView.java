@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -20,7 +21,7 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
     private NumberKeyOnClickListener linstener;
     private float keyScale = 1;
     private String keyTextFontFamily = "";
-    private int keyBackgroundColor = Color.TRANSPARENT;
+    private int keyBackgroundColor = Color.BLACK;
     private int keyHighlightColor = keyBackgroundColor;
     private int keyTextColor = Color.WHITE;
     private int keyTextSize = 0;
@@ -31,6 +32,10 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
     private int keyEmptyBackgroundColor = keyBackgroundColor;
     private KeyStyle keyStyle = KeyStyle.square;
     private KeyClearPosition keyClearPosition;
+    private String keyCustomText = "";
+    private int keyCustomTextColor = keyTextColor;
+    private int keyCustomBackgroundColor = keyBackgroundColor;
+    private int keyCustomHighlightColor = keyHighlightColor;
 
     public enum KeyStyle {
         square, circle
@@ -60,7 +65,7 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
                 if (this.getValue() == -1 || this.getValue() == -2)
                     return "";
                 else
-                    return "cus";
+                    return "";
             }
             return String.format("%d", this.getValue());
         }
@@ -119,6 +124,10 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
         keyEmptyBackgroundColor = typed.getColor(R.styleable.NumberKeyView_keyEmptyBackgroundColor, keyBackgroundColor);
         keyStyle = (style == 1) ? KeyStyle.square : KeyStyle.circle;
         keyClearPosition = (clearPosition == 1) ? KeyClearPosition.left : KeyClearPosition.right;
+        keyCustomText = typed.getString(R.styleable.NumberKeyView_keyCustomText);
+        keyCustomTextColor = typed.getColor(R.styleable.NumberKeyView_keyCustomTextColor, keyCustomTextColor);
+        keyCustomBackgroundColor = typed.getColor(R.styleable.NumberKeyView_keyCustomBackgroundColor, keyCustomBackgroundColor);
+        keyCustomHighlightColor = typed.getColor(R.styleable.NumberKeyView_keyCustomHighlightColor, keyCustomHighlightColor);
 
         int numberKey = 1;
         for (int row = 0; row < rows; row++) {
@@ -136,7 +145,7 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
                 button.setOnClickListener(this);
                 if (row == 3) {
                     if (col == 0)
-                        button.setKey(Key.empty);
+                        button.setKey((keyCustomText == null || keyCustomText.isEmpty()) ? Key.empty : Key.custom, keyCustomText);
                     if (col == 1)
                         button.setKey(Key.key0);
                     if (col == 2) {
@@ -185,12 +194,14 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
             button.setTextColor(keyTextColor);
             button.setTextSize(keyTextSize);
 
-            if (button.getKey() == Key.clear) {
+            if (button.getKey() == Key.clear)
                 button.setBackgroundColor(keyClearBackgroundColor);
-            }
-
-            if (button.getKey() == Key.empty) {
+            if (button.getKey() == Key.empty)
                 button.setBackgroundColor(keyEmptyBackgroundColor);
+            if (button.getKey() == Key.custom) {
+                button.setBackgroundColor(keyCustomBackgroundColor);
+                button.setPressedColor(keyCustomHighlightColor);
+                button.setTextColor(keyCustomTextColor);
             }
         }
 
@@ -201,17 +212,18 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
             if (drawableLeft > 0) {
                 clearKey.setIcon(drawableLeft);
             }
-            NumberKeyButton emptyKey = keys.get(11);
-            emptyKey.setKey(Key.empty);
-            emptyKey.setIcon(0);
+            NumberKeyButton otherKey = keys.get(11);
+            otherKey.setKey((keyCustomText == null || keyCustomText.isEmpty()) ? Key.empty : Key.custom, keyCustomText);
+            otherKey.setIcon(0);
         } else {
-            NumberKeyButton clearKey = keys.get(9);
-            clearKey.setKey(Key.empty);
+            NumberKeyButton otherKey = keys.get(9);
+            otherKey.setKey((keyCustomText == null || keyCustomText.isEmpty()) ? Key.empty : Key.custom, keyCustomText);
+            otherKey.setIcon(0);
 
-            NumberKeyButton emptyKey = keys.get(11);
-            emptyKey.setKey(Key.clear);
+            NumberKeyButton clearKey = keys.get(11);
+            clearKey.setKey(Key.clear);
             if (drawableLeft > 0) {
-                emptyKey.setIcon(drawableLeft);
+                clearKey.setIcon(drawableLeft);
             }
         }
     }

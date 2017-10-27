@@ -31,10 +31,14 @@
         app:keyTextColor="@android:color/white"
         app:keyTextSize="60sp"
         app:keyClearIcon="@drawable/ic_backspace_black"
-        app:keyClearPosition="right"
+        app:keyClearPosition="left"
         app:keyClearBackgroundColor="@android:color/white"
         app:keyEmptyBackgroundColor="@android:color/black"
         app:keyTextFontFamily="monospace"
+        app:keyCustomText="입력"
+        app:keyCustomTextColor="#000000"
+        app:keyCustomBackgroundColor="#efefef"
+        app:keyCustomHighlightColor="@color/colorAccent"
         />
 
 </LinearLayout>
