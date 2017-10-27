@@ -3,13 +3,16 @@ package com.neo1125.numberkeyview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class NumberKeyView extends LinearLayout implements View.OnClickListener {
@@ -36,6 +39,27 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
     private int keyCustomTextColor = keyTextColor;
     private int keyCustomBackgroundColor = keyBackgroundColor;
     private int keyCustomHighlightColor = keyHighlightColor;
+
+    private Key longPressedKey = null;
+    private boolean keyLongPressedEvent = false;
+    private long keyLongPressedLastTime = 0L;
+    private long keyLongPressedInterval = 600L;
+    private long keyInLongPressedInterval = 100L;
+    private Handler keyLongPressedHandler = new Handler();
+    private Runnable keyLongPressedRunnable = new Runnable() {
+        @Override
+        public void run() {
+            Handler handler = new Handler();
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (linstener != null && longPressedKey != null)
+                        linstener.onClick(longPressedKey);
+                }
+            });
+            keyLongPressedHandler.postDelayed(keyLongPressedRunnable, keyInLongPressedInterval);
+        }
+    };
 
     public enum KeyStyle {
         square, circle
@@ -93,7 +117,7 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         NumberKeyButton button = (NumberKeyButton) view;
-        if (linstener != null && button != null) {
+        if (linstener != null && button != null && keyLongPressedEvent == false) {
             linstener.onClick(button.getKey());
         }
     }
@@ -143,6 +167,39 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
                 button.setScale(keyScale);
                 button.setTextFontface(keyTextFontFamily);
                 button.setOnClickListener(this);
+                button.setOnTouchListener(new OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        NumberKeyButton button = (NumberKeyButton) v;
+                        if (button == null) return false;
+
+                        longPressedKey = button.getKey();
+                        Date date = new Date();
+
+                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                            keyLongPressedLastTime = date.getTime();
+                            keyLongPressedHandler.postDelayed(keyLongPressedRunnable, keyLongPressedInterval);
+                            return false;
+                        }
+
+                        if (event.getAction() != MotionEvent.ACTION_UP && event.getAction() != MotionEvent.ACTION_CANCEL) {
+                            return false;
+                        }
+
+                        keyLongPressedHandler.removeCallbacks(keyLongPressedRunnable);
+
+                        long interval = date.getTime() - keyLongPressedLastTime;
+                        if (interval >= keyLongPressedInterval) {
+                            keyLongPressedEvent = true;
+                            return false;
+                        }
+
+                        keyLongPressedEvent = false;
+                        longPressedKey = null;
+                        return false;
+                    }
+                });
                 if (row == 3) {
                     if (col == 0)
                         button.setKey((keyCustomText == null || keyCustomText.isEmpty()) ? Key.empty : Key.custom, keyCustomText);
