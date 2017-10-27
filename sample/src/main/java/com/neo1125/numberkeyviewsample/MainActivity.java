@@ -2,7 +2,6 @@ package com.neo1125.numberkeyviewsample;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.neo1125.numberkeyview.NumberKeyOnClickListener;

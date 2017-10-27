@@ -1,16 +1,16 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'com.novoda.bintray-release'
 
-//publish {
-//    userOrg = 'neo1125'
-//    groupId = 'com.neo1125'
-//    artifactId = 'numberkeyview'
-//    publishVersion = '0.1.0'
-//    desc = 'NumberKeyView UI for Android'
-//    website = 'https://github.com/neo1125/NumberKeyView'
-//    issueTracker = "${website}/issues"
-//    repository = "${website}.git"
-//}
+publish {
+    userOrg = 'neo1125'
+    groupId = 'com.neo1125'
+    artifactId = 'numberkeyview'
+    publishVersion = '0.1.1'
+    desc = 'NumberKeyView UI for Android'
+    website = 'https://github.com/neo1125/NumberKeyView'
+    issueTracker = "${website}/issues"
+    repository = "${website}.git"
+}
 
 android {
     compileSdkVersion 26

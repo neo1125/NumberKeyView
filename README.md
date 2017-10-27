@@ -4,7 +4,7 @@ Gradle dependency  ```build.gradle```
 
 ```
 dependencies {
-    compile 'com.neo1125:numberkeyview:0.1.0'
+    compile 'com.neo1125:numberkeyview:0.1.1'
 }
 ```
 
@@ -28,6 +28,10 @@ Example Usage:
         app:keyEmptyBackgroundColor="@android:color/black"
         app:keyClearPosition="right"
         app:keyTextFontFamily="monospace"
+        app:keyCustomText="입력"
+        app:keyCustomTextColor="#000000"
+        app:keyCustomBackgroundColor="#efefef"
+        app:keyCustomHighlightColor="@color/colorAccent"
         />
 ```
 
