@@ -23,6 +23,7 @@
         <attr name="keyBorderSize" format="dimension"/>
         <attr name="keyClearIcon" format="reference"/>
         <attr name="keyClearBackgroundColor" format="color" />
+        <attr name="keyClearTintColor" format="color"/>
         <attr name="keyClearPosition" format="enum">
             <enum name="left" value="1" />
             <enum name="right" value="2" />
@@ -32,6 +33,7 @@
         <attr name="keyCustomTextColor" format="color" />
         <attr name="keyCustomBackgroundColor" format="color" />
         <attr name="keyCustomHighlightColor" format="color" />
+        <attr name="keyCustomEnabledColor" format="color" />
     </declare-styleable>
 
 </resources>

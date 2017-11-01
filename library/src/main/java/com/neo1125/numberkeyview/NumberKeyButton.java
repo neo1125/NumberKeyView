@@ -158,7 +158,15 @@ class NumberKeyButton extends FrameLayout {
 
     public void setTextFontface(String familyName, int style) {
         if (familyName != null) {
-            Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), String.format("%s.ttf", familyName));
+            Typeface typeface = null;
+            try {
+                typeface = Typeface.createFromAsset(getContext().getAssets(), String.format("%s.ttf", familyName));
+            } catch (Exception e) {}
+
+            try {
+                typeface = Typeface.createFromAsset(getContext().getAssets(), String.format("%s.otf", familyName));
+            } catch (Exception e) {}
+
             if (typeface != null)
                 titleTextView.setTypeface(typeface, style);
             else
@@ -184,7 +192,15 @@ class NumberKeyButton extends FrameLayout {
         titleTextView.setVisibility(drawable == 0 ? VISIBLE : GONE);
     }
 
+    public void setIconTintColor(int color) {
+        iconImageView.setColorFilter(color);
+    }
+
     public void setScale(float scale) {
         this.scale = scale;
+    }
+
+    public void setKeyText(String text) {
+        titleTextView.setText(text);
     }
 }

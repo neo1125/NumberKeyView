@@ -3,6 +3,8 @@ package com.neo1125.numberkeyviewsample;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.neo1125.numberkeyview.NumberKeyOnClickListener;
@@ -11,6 +13,7 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
+    NumberKeyView numberKeyView;
     TextView textView;
 
     @Override
@@ -19,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         textView = (TextView) findViewById(R.id.textView);
 
-        NumberKeyView numberKeyView = (NumberKeyView) findViewById(R.id.numberKey);
+        numberKeyView = (NumberKeyView) findViewById(R.id.numberKey);
         numberKeyView.setOnNumberKeyOnClickListener(new NumberKeyOnClickListener() {
             @Override
             public void onClick(NumberKeyView.Key key) {
@@ -43,5 +46,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
+
+    public void onClick(View v) {
+        int rand = (int) ((Math.random() * 10) + 1);
+        numberKeyView.setKeyCustomText((rand%2 == 0) ? "적립" : "입력");
+        numberKeyView.setKeyCustomEnabled((rand%3 == 0) ? true : false);
     }
 }

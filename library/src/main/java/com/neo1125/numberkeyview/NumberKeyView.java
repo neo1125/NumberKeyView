@@ -33,6 +33,7 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
     private int keyBorderSize = 0;
     private int drawableLeft = 0;
     private int keyClearBackgroundColor = keyBackgroundColor;
+    private int keyClearTintColor = keyClearBackgroundColor;
     private int keyEmptyBackgroundColor = keyBackgroundColor;
     private KeyStyle keyStyle = KeyStyle.square;
     private KeyClearPosition keyClearPosition;
@@ -40,6 +41,7 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
     private int keyCustomTextColor = keyTextColor;
     private int keyCustomBackgroundColor = keyBackgroundColor;
     private int keyCustomHighlightColor = keyHighlightColor;
+    private int keyCustomEnabledColor = keyBackgroundColor;
 
     private Key longPressedKey = null;
     private boolean keyLongPressedEvent = false;
@@ -147,6 +149,7 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
         keyBorderSize = typed.getDimensionPixelSize(R.styleable.NumberKeyView_keyBorderSize, keyBorderSize);
         drawableLeft = typed.getResourceId(R.styleable.NumberKeyView_keyClearIcon, drawableLeft);
         keyClearBackgroundColor = typed.getColor(R.styleable.NumberKeyView_keyClearBackgroundColor, keyBackgroundColor);
+        keyClearTintColor = typed.getColor(R.styleable.NumberKeyView_keyClearTintColor, keyClearTintColor);
         int clearPosition = typed.getInt(R.styleable.NumberKeyView_keyClearPosition, 1);
         keyEmptyBackgroundColor = typed.getColor(R.styleable.NumberKeyView_keyEmptyBackgroundColor, keyBackgroundColor);
         keyStyle = (style == 1) ? KeyStyle.square : KeyStyle.circle;
@@ -155,6 +158,7 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
         keyCustomTextColor = typed.getColor(R.styleable.NumberKeyView_keyCustomTextColor, keyCustomTextColor);
         keyCustomBackgroundColor = typed.getColor(R.styleable.NumberKeyView_keyCustomBackgroundColor, keyCustomBackgroundColor);
         keyCustomHighlightColor = typed.getColor(R.styleable.NumberKeyView_keyCustomHighlightColor, keyCustomHighlightColor);
+        keyCustomEnabledColor = typed.getColor(R.styleable.NumberKeyView_keyCustomEnabledColor, keyCustomEnabledColor);
 
         int numberKey = 1;
         for (int row = 0; row < rows; row++) {
@@ -254,8 +258,10 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
             button.setTextColor(keyTextColor);
             button.setTextSize(keyTextSize);
 
-            if (button.getKey() == Key.clear)
+            if (button.getKey() == Key.clear) {
                 button.setBackgroundColor(keyClearBackgroundColor);
+                button.setIconTintColor(keyClearTintColor);
+            }
             if (button.getKey() == Key.empty)
                 button.setBackgroundColor(keyEmptyBackgroundColor);
             if (button.getKey() == Key.custom) {
@@ -336,4 +342,24 @@ public class NumberKeyView extends LinearLayout implements View.OnClickListener 
         keyEmptyBackgroundColor = color;
     }
 
+    public void setKeyCustomText(String text) {
+
+        NumberKeyButton button1 = keys.get(9);
+        NumberKeyButton button2 = keys.get(11);
+        if (button1.getKey() == Key.custom)
+            button1.setKeyText(text);
+        else if (button2.getKey() == Key.custom)
+            button2.setKeyText(text);
+    }
+
+    public void setKeyCustomEnabled(boolean enabled) {
+        NumberKeyButton keyButton = null;
+        if (keys.get(9).getKey() == Key.custom)
+            keyButton = keys.get(9);
+        else if (keys.get(11).getKey() == Key.custom)
+            keyButton = keys.get(11);
+
+        keyButton.setEnabled(enabled);
+        keyButton.setBackgroundColor(enabled ? keyCustomBackgroundColor : keyCustomEnabledColor);
+    }
 }
