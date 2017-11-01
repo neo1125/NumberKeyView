@@ -25,6 +25,7 @@ Example Usage:
         app:keyTextColor="@android:color/white"
         app:keyTextSize="60sp"
         app:keyClearIcon="@drawable/ic_backspace_black"
+        app:keyClearTintColor="@color/colorAccent"
         app:keyClearBackgroundColor="@android:color/white"
         app:keyEmptyBackgroundColor="@android:color/black"
         app:keyClearPosition="right"
@@ -33,6 +34,7 @@ Example Usage:
         app:keyCustomTextColor="#000000"
         app:keyCustomBackgroundColor="#efefef"
         app:keyCustomHighlightColor="@color/colorAccent"
+        app:keyCustomEnabledColor="#fff9b3"
         />
 ```
 
